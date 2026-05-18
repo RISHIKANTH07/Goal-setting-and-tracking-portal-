@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - Goal Tracker</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f2f2f2; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .container { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 300px; }
+        h2 { text-align: center; }
+        label { display: block; margin-top: 1rem; }
+        input, button { width: 100%; padding: 8px; margin-top: 0.5rem; box-sizing: border-box; }
+        button { background: #007bff; color: white; border: none; cursor: pointer; border-radius: 4px; }
+        button:hover { background: #0056b3; }
+        .error { color: red; text-align: center; margin-top: 1rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <form method="post">
+            <label>Username</label>
+            <input type="text" name="username" required placeholder="emp or mgr">
+            <button type="submit">Login</button>
+        </form>
+        <p style="text-align:center; margin-top:1rem;">Demo: emp (employee) / mgr (manager)</p>
+    </div>
+</body>
+</html>

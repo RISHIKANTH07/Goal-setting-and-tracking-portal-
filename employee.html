@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Dashboard</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background: #007bff; color: white; }
+        .btn { display: inline-block; padding: 6px 12px; background: #28a745; color: white; text-decoration: none; border-radius: 4px; margin: 10px 0; }
+        .btn-add { background: #007bff; }
+        .status-form { display: inline; }
+        select, button { padding: 4px; }
+        .warning { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Employee Dashboard</h1>
+    <p>Welcome, <strong>{{ session['user'] }}</strong> (role: employee)</p>
+    <a href="/add" class="btn btn-add">+ Add New Goal</a>
+    <a href="/" style="float:right;">Logout</a>
+
+    {% if goals %}
+    <table>
+        <thead>
+            <tr><th>Title</th><th>Target</th><th>Weight (%)</th><th>Status</th><th>Update Status</th><th>Approved</th></tr>
+        </thead>
+        <tbody>
+            {% for goal in goals %}
+            <tr>
+                <td>{{ goal.title }}</td>
+                <td>{{ goal.target }}</td>
+                <td>{{ goal.weight }}</td>
+                <td>{{ goal.status }}</td>
+                <td>
+                    <form class="status-form" method="post" action="/update/{{ loop.index0 }}">
+                        <select name="status">
+                            <option value="Not Started" {% if goal.status == "Not Started" %}selected{% endif %}>Not Started</option>
+                            <option value="In Progress" {% if goal.status == "In Progress" %}selected{% endif %}>In Progress</option>
+                            <option value="Completed" {% if goal.status == "Completed" %}selected{% endif %}>Completed</option>
+                        </select>
+                        <button type="submit">Update</button>
+                    </form>
+                </td>
+                <td>{% if goal.approved %} ✅ {% else %} ❌ {% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No goals added yet. Click "Add New Goal" to start.</p>
+    {% endif %}
+</body>
+</html>

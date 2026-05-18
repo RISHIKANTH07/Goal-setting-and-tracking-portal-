@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manager Dashboard</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background: #28a745; color: white; }
+        .approve-btn { background: #ffc107; padding: 4px 8px; text-decoration: none; color: black; border-radius: 4px; }
+        .approved { color: green; font-weight: bold; }
+        .logout { float:right; }
+    </style>
+</head>
+<body>
+    <h1>Manager Dashboard</h1>
+    <p>Welcome, <strong>{{ session['user'] }}</strong> (role: manager)</p>
+    <a href="/" class="logout">Logout</a>
+
+    {% if goals %}
+    <table>
+        <thead>
+            <tr><th>Title</th><th>Target</th><th>Weight (%)</th><th>Status</th><th>Approval</th><th>Action</th></tr>
+        </thead>
+        <tbody>
+            {% for goal in goals %}
+            <tr>
+                <td>{{ goal.title }}</td>
+                <td>{{ goal.target }}</td>
+                <td>{{ goal.weight }}</td>
+                <td>{{ goal.status }}</td>
+                <td>{% if goal.approved %}<span class="approved">Approved</span>{% else %}Pending{% endif %}</td>
+                <td>
+                    {% if not goal.approved %}
+                    <a href="/approve/{{ loop.index0 }}" class="approve-btn">Approve</a>
+                    {% else %}
+                    —
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No goals submitted by employees yet.</p>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Goal</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        .container { max-width: 500px; margin: auto; background: #f9f9f9; padding: 20px; border-radius: 8px; }
+        label { display: block; margin-top: 15px; font-weight: bold; }
+        input, button { width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box; }
+        button { background: #28a745; color: white; border: none; cursor: pointer; border-radius: 4px; }
+        .error { color: red; font-size: 0.9em; margin-top: 5px; }
+        .note { background: #e9ecef; padding: 10px; margin-bottom: 20px; border-radius: 4px; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Add New Goal</h2>
+        <div class="note">
+            Rules: <br>
+            - Max 8 goals total.<br>
+            - Each goal weight ≥ 10%.<br>
+            - Total weight of all goals ≤ 100%.
+        </div>
+        <form method="post">
+            <label>Goal Title</label>
+            <input type="text" name="title" required>
+
+            <label>Target / Description</label>
+            <input type="text" name="target" required placeholder="e.g., Increase sales by 10%">
+
+            <label>Weight (%)</label>
+            <input type="number" name="weight" min="10" max="100" required>
+            <small>Minimum 10%</small>
+
+            <button type="submit">Submit Goal</button>
+        </form>
+        <a href="/employee" style="display:inline-block; margin-top:20px;">← Back to Dashboard</a>
+    </div>
+</body>
+</html>
